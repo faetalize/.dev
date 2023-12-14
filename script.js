@@ -49,8 +49,8 @@ landingText.addEventListener('click', function() {
 
 let currentPage;
 //add a click event listener to each navigationItem matching the index of the page
-for (let i = 0; i < navigationItem.length; i++) {
-    navigationItem[i].addEventListener('click', function() {
+for (let i = 0; i < navigationItems.length; i++) {
+    navigationItems[i].addEventListener('click', function() {
         //hide the navigationMenu
         hideElement(navigationMenu);
         //show header and footer
