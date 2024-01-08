@@ -1,3 +1,4 @@
+"use strict";
 const landingText = document.querySelector('.landingText');
 const pages = document.querySelectorAll('.page');
 const navigationMenu = document.querySelector('.navigationMenu');
@@ -66,3 +67,4 @@ backButton === null || backButton === void 0 ? void 0 : backButton.addEventListe
     hide(currentPage);
     currentPage = null;
 });
+//# sourceMappingURL=script.js.map
