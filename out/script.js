@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 const landingText = document.querySelector('.landingText');
 const pages = document.querySelectorAll('.page');
 const navigationMenu = document.querySelector('.navigationMenu');
@@ -68,10 +59,10 @@ function show(element, transitioning) {
  * @param {boolean} loop Whether or not to loop the audio
  */
 function playAudio(path, initialVolume, finalVolume, duration_ms, loop) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let audioElement = new Audio(path);
-        audioElement.volume = initialVolume;
-        audioElement.loop = loop;
+    let audioElement = new Audio(path);
+    audioElement.volume = initialVolume;
+    audioElement.loop = loop;
+    try {
         audioElement.play();
         let volumeStep = (finalVolume - initialVolume) / duration_ms;
         let interval = setInterval(() => {
@@ -80,7 +71,10 @@ function playAudio(path, initialVolume, finalVolume, duration_ms, loop) {
                 clearInterval(interval);
             }
         }, 1);
-    });
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 //hide all elements aside from the landing text
 for (let page of pages)
