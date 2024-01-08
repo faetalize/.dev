@@ -61,18 +61,24 @@ function show(element: HTMLElement, transitioning: boolean): void {
  * @param {number} duration_ms Duration of the volume increase
  * @param {boolean} loop Whether or not to loop the audio
  */
-async function playAudio(path: string, initialVolume: number, finalVolume: number, duration_ms: number, loop: boolean): Promise<void> {
+function playAudio(path: string, initialVolume: number, finalVolume: number, duration_ms: number, loop: boolean): void {
     let audioElement = new Audio(path);
     audioElement.volume = initialVolume;
     audioElement.loop = loop;
-    audioElement.play();
-    let volumeStep = (finalVolume - initialVolume) / duration_ms;
-    let interval = setInterval(() => {
-        audioElement.volume += volumeStep;
-        if (audioElement.volume >= finalVolume) {
-            clearInterval(interval);
-        }
-    }, 1);
+    try {
+        audioElement.play();
+        let volumeStep = (finalVolume - initialVolume) / duration_ms;
+        let interval = setInterval(() => {
+            audioElement.volume += volumeStep;
+            if (audioElement.volume >= finalVolume) {
+                clearInterval(interval);
+            }
+        }, 1);
+    } 
+    catch (error) {
+        console.log(error);
+    }
+
 }
 
 //hide all elements aside from the landing text
