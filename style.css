@@ -1,57 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
-*{
+
+* {
     padding: 0;
     margin: 0;
     color: white;
-    cursor:default;
+    cursor: default;
     font-family: 'Cinzel', serif;
 }
 
-body{
+body {
     display: flex;
-    height: 100vh;
     flex-direction: column;
+    height: 100vh;
     background: black;
 }
 
-p:not(.landingText p){
-    cursor:text;
-}
-
-.hbutton{
+a {
     cursor: pointer;
 }
-.hbutton:hover{
+
+p:not(.landingText p) {
+    cursor: text;
+}
+
+.hbutton {
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.hbutton:hover {
     filter: drop-shadow(0px 0px 5px white);
 }
 
-.headerBar{
+.headerBar {
     display: flex;
     z-index: 98;
+
+    .hbutton {
+
+        font-size: 2rem;
+        padding: 1rem;
+    }
 }
 
-
-
-.backButton{
-    font-size: 2rem;
-    padding: 1rem;
-    
-}
-
-
-
-.footerBar{
+.footerBar {
     display: flex;
     z-index: 98;
-    
+
     margin-top: auto;
 }
 
-    
-.footerItem{
+
+.footerItem {
     padding: 1rem;
 }
-.backgroundImg{
+
+.backgroundImg {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -59,21 +63,21 @@ p:not(.landingText p){
     height: 100vh;
     width: 100vw;
     object-fit: cover;
-    justify-content:end;
+    justify-content: end;
     align-items: center;
 }
 
-.backgroundImg img{
+.backgroundImg img {
     /*fit the image at the bottom of the screen*/
     object-fit: cover;
     width: 65vh;
     object-position: bottom;
-    transition : filter 0.5s;
+    transition: filter 0.5s;
     filter: blur(25px);
 
 }
 
-.landingText{
+.landingText {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -87,19 +91,19 @@ p:not(.landingText p){
     font-size: 3rem;
 }
 
-.landingText p{
+.landingText p {
     transition: 0.1s;
     font-weight: 600;
 }
 
-.landingText p:hover{
+.landingText p:hover {
     font-size: 3.05rem;
     filter: drop-shadow(0px 0px 5px white);
-    
+
     transition: 0.2s;
 }
 
-.navigationMenu{
+.navigationMenu {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -112,12 +116,87 @@ p:not(.landingText p){
     width: 100vw;
 }
 
-.page{
+.page {
     position: fixed;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
     height: 100vh;
     width: 100vw;
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    overflow-y: auto;
+    max-width: 32rem;
+    border-radius: 12px;
+    max-height: calc(100vh - 20rem);
+    padding: 1rem;
+}
+
+.img-wrapper {
+    width: 8rem;
+    border-radius: 4rem;
+    overflow: hidden;
+    transition: transform 0.2s;
+
+    img {
+        display: block;
+        width: 100%;
+    }
+}
+
+.img-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.username {
+    font-weight: 600;
+    font-style: italic;
+}
+
+.chip-array {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    justify-content: center;
+}
+
+.chip {
+    color: #c1c1c1;
+    font-size: 0.9rem;
+    transition: filter 0.2s, color 0.2s;
+}
+
+.description {
+    * {
+        margin-bottom: 0.5rem;
+        text-align: justify;
+
+    }
+}
+
+.overlay {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(25px);
+    z-index: 100;
+}
+
+.overlayContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+    gap: 1rem;
 }
