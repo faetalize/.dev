@@ -25,10 +25,12 @@ p:not(.landingText p) {
 
 .hbutton {
     cursor: pointer;
+    -webkit-transition: filter 0.2s;
     transition: filter 0.2s;
 }
 
 .hbutton:hover {
+    -webkit-filter: drop-shadow(0px 0px 5px white);
     filter: drop-shadow(0px 0px 5px white);
 }
 
@@ -37,7 +39,6 @@ p:not(.landingText p) {
     z-index: 98;
 
     .hbutton {
-
         font-size: 2rem;
         padding: 1rem;
     }
@@ -46,10 +47,8 @@ p:not(.landingText p) {
 .footerBar {
     display: flex;
     z-index: 98;
-
     margin-top: auto;
 }
-
 
 .footerItem {
     padding: 1rem;
@@ -72,9 +71,10 @@ p:not(.landingText p) {
     object-fit: cover;
     width: 65dvh;
     object-position: bottom;
+    -webkit-transition: filter 0.5s;
     transition: filter 0.5s;
+    -webkit-filter: blur(25px);
     filter: blur(25px);
-
 }
 
 .landingText {
@@ -83,23 +83,23 @@ p:not(.landingText p) {
     justify-content: center;
     text-align: center;
     align-items: center;
-
     height: 100dvh;
     width: 100dvw;
-
     z-index: 99;
     font-size: 3rem;
 }
 
 .landingText p {
+    -webkit-transition: 0.1s;
     transition: 0.1s;
     font-weight: 600;
 }
 
 .landingText p:hover {
     font-size: 3.05rem;
+    -webkit-filter: drop-shadow(0px 0px 5px white);
     filter: drop-shadow(0px 0px 5px white);
-
+    -webkit-transition: 0.2s;
     transition: 0.2s;
 }
 
@@ -109,9 +109,7 @@ p:not(.landingText p) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     font-size: 2rem;
-
     height: 100dvh;
     width: 100dvw;
 }
@@ -142,6 +140,7 @@ p:not(.landingText p) {
     width: 8rem;
     border-radius: 4rem;
     overflow: hidden;
+    -webkit-transition: transform 0.2s;
     transition: transform 0.2s;
 
     img {
@@ -151,6 +150,7 @@ p:not(.landingText p) {
 }
 
 .img-wrapper:hover {
+    -webkit-transform: scale(1.05);
     transform: scale(1.05);
 }
 
@@ -169,6 +169,7 @@ p:not(.landingText p) {
 .chip {
     color: #c1c1c1;
     font-size: 0.9rem;
+    -webkit-transition: filter 0.2s, color 0.2s;
     transition: filter 0.2s, color 0.2s;
 }
 
@@ -176,7 +177,6 @@ p:not(.landingText p) {
     * {
         margin-bottom: 0.5rem;
         text-align: justify;
-
     }
 }
 
@@ -186,6 +186,7 @@ p:not(.landingText p) {
     flex-direction: column;
     height: 100dvh;
     width: 100dvw;
+    -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
     z-index: 100;
 }
