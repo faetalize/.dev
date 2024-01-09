@@ -33,13 +33,13 @@ function hide(element: HTMLElement): void {
 function show(element: HTMLElement, transitioning: boolean): void {
     if (transitioning) {
         setTimeout(function () {
-            // Change display property
             element.style.display = 'flex';
-            // Wait for next frame for display change to take effect
+            // hackery to ensure the transition works on mobile, idk why this works but who fucking cares
             requestAnimationFrame(function () {
-                // Start opacity transition
-                element.style.transition = 'opacity 0.5s';
-                element.style.opacity = '1';
+                requestAnimationFrame(function () {
+                    element.style.transition = 'opacity 0.5s';
+                    element.style.opacity = '1';
+                });
             });
         }, 500);
     }
@@ -74,7 +74,7 @@ function playAudio(path: string, initialVolume: number, finalVolume: number, dur
                 clearInterval(interval);
             }
         }, 1);
-    } 
+    }
     catch (error) {
         console.log(error);
     }
@@ -103,6 +103,7 @@ landingText?.addEventListener('click', function () {
 creditsButton?.addEventListener('click', function () {
     show(overlay as HTMLElement, false);
 });
+
 overlayCloseButton?.addEventListener('click', function () {
     hide(overlay as HTMLElement);
 });
@@ -119,8 +120,8 @@ navigationMenu?.addEventListener('click', function (event) {
 
 backButton?.addEventListener('click', function () {
     hide(headerBar as HTMLElement);
-    show(navigationMenu as HTMLElement, true);
     hide(currentPage as HTMLElement);
+    show(navigationMenu as HTMLElement, true);
     currentPage = null;
 });
 

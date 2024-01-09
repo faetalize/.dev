@@ -31,13 +31,13 @@ function hide(element) {
 function show(element, transitioning) {
     if (transitioning) {
         setTimeout(function () {
-            // Change display property
             element.style.display = 'flex';
-            // Wait for next frame for display change to take effect
+            // hackery to ensure the transition works on mobile, idk why this works but who fucking cares
             requestAnimationFrame(function () {
-                // Start opacity transition
-                element.style.transition = 'opacity 0.5s';
-                element.style.opacity = '1';
+                requestAnimationFrame(function () {
+                    element.style.transition = 'opacity 0.5s';
+                    element.style.opacity = '1';
+                });
             });
         }, 500);
     }
@@ -110,8 +110,8 @@ navigationMenu === null || navigationMenu === void 0 ? void 0 : navigationMenu.a
 });
 backButton === null || backButton === void 0 ? void 0 : backButton.addEventListener('click', function () {
     hide(headerBar);
-    show(navigationMenu, true);
     hide(currentPage);
+    show(navigationMenu, true);
     currentPage = null;
 });
 //# sourceMappingURL=script.js.map
