@@ -70,8 +70,11 @@ function playAudio(path, initialVolume, finalVolume, duration_ms, loop) {
             let steps = duration_ms / intervalDuration;
             let volumeStep = (finalVolume - initialVolume) / steps;
             let interval = setInterval(() => {
-                audioElement.volume += volumeStep;
-                if (audioElement.volume >= finalVolume) {
+                if (audioElement.volume + volumeStep < finalVolume) {
+                    audioElement.volume += volumeStep;
+                }
+                else {
+                    audioElement.volume = finalVolume;
                     clearInterval(interval);
                 }
             }, intervalDuration);
@@ -90,7 +93,7 @@ hide(footerBar);
 hide(overlay);
 //hide the landingtext on click and show the menu
 landingText === null || landingText === void 0 ? void 0 : landingText.addEventListener('click', function () {
-    playAudio('./media/mist.mp3', 0, 0.65, 3000, true);
+    playAudio('./media/mist.mp3', 0, 0.2, 10000, true);
     hide(landingText);
     if (backgroundImg)
         backgroundImg.style.filter = 'blur(0px)';
