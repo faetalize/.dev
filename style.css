@@ -21,8 +21,8 @@ a {
 
 p:not(.landingText p) {
     cursor: text;
-    text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px;
-    
+    text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
+
 }
 
 .hbutton {
@@ -50,10 +50,15 @@ p:not(.landingText p) {
     display: flex;
     z-index: 98;
     margin-top: auto;
+    padding: 1rem;
 }
 
-.footerItem {
-    padding: 1rem;
+.footerItem:not(:last-child)::after {
+    all: initial;
+    color: rgb(199, 199, 199);
+    content: "•";
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .backgroundImg {
@@ -195,7 +200,7 @@ p:not(.landingText p) {
     z-index: 100;
 }
 
-.overlayContent{
+.overlayContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
