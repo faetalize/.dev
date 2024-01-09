@@ -54,7 +54,7 @@ function show(element: HTMLElement, transitioning: boolean): void {
 }
 
 /**
- * Plays audio file with a gradual increase in volume
+ * Plays audio file with a gradual increase in volume (after enough has loaded)
  * @param {string} path The path to the audio file
  * @param {number} initialVolume Initial volume
  * @param {number} finalVolume Final volume
@@ -65,20 +65,24 @@ function playAudio(path: string, initialVolume: number, finalVolume: number, dur
     let audioElement = new Audio(path);
     audioElement.volume = initialVolume;
     audioElement.loop = loop;
-    try {
-        audioElement.play();
-        let volumeStep = (finalVolume - initialVolume) / duration_ms;
-        let interval = setInterval(() => {
-            audioElement.volume += volumeStep;
-            if (audioElement.volume >= finalVolume) {
-                clearInterval(interval);
-            }
-        }, 1);
-    }
-    catch (error) {
-        console.log(error);
-    }
-
+    //start when enough of the audio has loaded
+    audioElement.addEventListener('canplay', function () {
+        try {
+            audioElement.play();
+            let intervalDuration = 100;
+            let steps = duration_ms / intervalDuration;
+            let volumeStep = (finalVolume - initialVolume) / steps;
+            let interval = setInterval(() => {
+                audioElement.volume += volumeStep;
+                if (audioElement.volume >= finalVolume) {
+                    clearInterval(interval);
+                }
+            }, intervalDuration);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
 }
 
 //hide all elements aside from the landing text
