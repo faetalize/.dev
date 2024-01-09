@@ -131,31 +131,38 @@ p:not(.landingText p) {
     width: 100dvw;
 }
 
+.content {
+    overflow-y: auto;
+    width: 32rem;
+    max-width: calc(100vw - 5rem);
+    max-height: calc(100dvh - 10rem);
+}
+
 .bio {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     align-items: center;
-    overflow-y: auto;
-    max-width: 32rem;
-    border-radius: 12px;
-    max-height: calc(100dvh - 20rem);
-    padding: 1rem;
+    gap: 1rem;
 }
 
 .img-wrapper {
+    display: block;
     width: 8rem;
     height: 8rem;
+    min-height: 8rem;
+    min-height: 8rem;
     border-radius: 4rem;
     overflow: hidden;
     -webkit-transition: transform 0.2s;
     transition: transform 0.2s;
 
-    img {
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
+
+}
+
+.img-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .img-wrapper:hover {
