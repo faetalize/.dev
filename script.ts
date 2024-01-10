@@ -130,5 +130,3 @@ backButton?.addEventListener('click', function () {
     show(navigationMenu as HTMLElement, true);
     currentPage = null;
 });
-
-
