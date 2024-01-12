@@ -37,7 +37,6 @@ p:not(.landingText p) {
 }
 
 .headerBar {
-    display: flex;
     z-index: 98;
 
     .hbutton {
@@ -46,8 +45,14 @@ p:not(.landingText p) {
     }
 }
 
+#header-main{
+    display: none;
+    opacity: 0;
+}
+
 .footerBar {
-    display: flex;
+    display: none;
+    opacity: 0;
     z-index: 98;
     margin-top: auto;
     padding: 1rem;
@@ -112,7 +117,8 @@ p:not(.landingText p) {
 
 .navigationMenu {
     position: fixed;
-    display: flex;
+    display: none;
+    opacity: 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -122,8 +128,9 @@ p:not(.landingText p) {
 }
 
 .page {
+    display: none;
+    opacity: 0;
     position: fixed;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -198,7 +205,8 @@ p:not(.landingText p) {
 
 .overlay {
     position: fixed;
-    display: flex;
+    display: none;
+    opacity: 0;
     flex-direction: column;
     height: 100dvh;
     width: 100dvw;
