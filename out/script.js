@@ -44,9 +44,10 @@ function show(element, transitioning) {
     else {
         element.style.display = 'flex';
         requestAnimationFrame(function () {
-            // Start opacity transition
-            element.style.transition = 'opacity 0.5s';
-            element.style.opacity = '1';
+            requestAnimationFrame(function () {
+                element.style.transition = 'opacity 0.5s';
+                element.style.opacity = '1';
+            });
         });
     }
 }
