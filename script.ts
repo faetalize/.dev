@@ -88,14 +88,6 @@ function playAudio(path: string, initialVolume: number, finalVolume: number, dur
     });
 }
 
-//hide all elements aside from the landing text
-for (let page of pages)
-    hide(page as HTMLElement);
-hide(navigationMenu as HTMLElement);
-hide(headerBar as HTMLElement);
-hide(footerBar as HTMLElement);
-hide(overlay as HTMLElement);
-
 
 //hide the landingtext on click and show the menu
 landingText?.addEventListener('click', function () {

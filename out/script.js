@@ -85,13 +85,6 @@ function playAudio(path, initialVolume, finalVolume, duration_ms, loop) {
         }
     });
 }
-//hide all elements aside from the landing text
-for (let page of pages)
-    hide(page);
-hide(navigationMenu);
-hide(headerBar);
-hide(footerBar);
-hide(overlay);
 //hide the landingtext on click and show the menu
 landingText === null || landingText === void 0 ? void 0 : landingText.addEventListener('click', function () {
     playAudio('./media/mist.mp3', 0, 0.2, 10000, true);
