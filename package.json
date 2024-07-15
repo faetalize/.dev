@@ -1,0 +1,22 @@
+{
+  "name": "faetalize.dev",
+  "version": "1.0.0",
+  "description": "A portfolio SPA website",
+  "main": "script.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faetalize/.dev.git"
+  },
+  "author": "faetalize",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/faetalize/.dev/issues"
+  },
+  "homepage": "https://github.com/faetalize/.dev#readme",
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}
