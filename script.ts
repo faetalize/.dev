@@ -1,3 +1,9 @@
+import start from './media/start.mp3';
+import hover from './media/hover.mp3';
+import select from './media/select.mp3';
+import back from './media/back.mp3';
+import bgm from './media/bgm.mp3';
+
 const landingText: HTMLElement | null = document.querySelector(".landingText");
 const pages: NodeListOf<HTMLElement> = document.querySelectorAll(".page");
 const navigationMenu: HTMLElement | null =
@@ -107,8 +113,8 @@ function playAudio(
 
 //hide the landingtext on click, show the menu, and play the audio
 landingText?.addEventListener("click", function () {
-  playAudio("./media/start.mp3", 0.3, 0.8, 1500, false);
-  playAudio("./media/mist.mp3", 0, 0.8, 10000, true);
+  playAudio(start, 0.3, 0.8, 1500, false);
+  playAudio(bgm, 0, 0.8, 10000, true);
   hide(landingText as HTMLElement);
   if (backgroundImg) backgroundImg.style.filter = "blur(0px)";
   show(navigationMenu as HTMLElement, true);
@@ -129,29 +135,29 @@ navigationMenu?.addEventListener("click", function (event) {
       event.target as HTMLElement
     );
     hide(navigationMenu as HTMLElement);
+    hide(backgroundImg as HTMLElement);
     show(headerBar as HTMLElement, true);
     show(pages[index] as HTMLElement, true);
     currentPage = pages[index];
   }
 });
-
-//sound effects
-for (let button of highlightButtons) {
-  button.addEventListener("mouseover", () => {
-    playAudio("./media/hover.mp3", 0.8, 0.8, 10, false);
-  });
-  button.addEventListener("click", () => {
-    if (button.id == "btn-navigation-back") {
-      playAudio("./media/back.mp3", 0.8, 0.8, 0, false);
-    } else {
-      playAudio("./media/select.mp3", 0.8, 0.8, 0, false);
-    }
-  });
-}
-
 backButton?.addEventListener("click", function () {
   hide(headerBar as HTMLElement);
   hide(currentPage as HTMLElement);
   show(navigationMenu as HTMLElement, true);
+  show(backgroundImg as HTMLElement, true);
   currentPage = null;
 });
+//sound effects
+for (let button of highlightButtons) {
+  button.addEventListener("mouseover", () => {
+    playAudio(hover, 0.8, 0.8, 10, false);
+  });
+  button.addEventListener("click", () => {
+    if (button.id == "btn-navigation-back") {
+      playAudio(back, 0.8, 0.8, 0, false);
+    } else {
+      playAudio(select, 0.8, 0.8, 0, false);
+    }
+  });
+}
