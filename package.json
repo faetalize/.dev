@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/faetalize/.dev.git"
+    "url": "git+https://github.com/faetalize/dotdev.git"
   },
   "author": "faetalize",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/faetalize/.dev/issues"
+    "url": "https://github.com/faetalize/dotdev/issues"
   },
-  "homepage": "https://github.com/faetalize/.dev#readme",
+  "homepage": "https://github.com/faetalize/dotdev#readme",
   "devDependencies": {
     "typescript": "^5.5.3",
     "vite": "^5.3.3"
