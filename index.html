@@ -8,32 +8,28 @@
     <title>faetal</title>
   </head>
   <body>
-    <div class="backgroundImg">
-      <img src="https://i.redd.it/07ksnxfh9gr81.gif" alt="background image" />
+    <!-- Landing -->
+    <div id="landing-screen">
+      <p id="landing-text">Embrace the Golden Order.</p>
     </div>
-    <div class="landingText">
-      <p>Embrace the Golden Order.</p>
+    <!-- Background Image -->
+    <div id="bg">
+      <img src="https://i.redd.it/07ksnxfh9gr81.gif" alt="Background image" />
     </div>
-    <div class="headerBar" id="header-main">
+    <!-- Header -->
+    <div class="header" id="header-main">
       <div class="hbutton" id="btn-navigation-back">BACK</div>
     </div>
-    <div class="footerBar">
-      <div class="footerItem hbutton" id="credits">Credits</div>
-      <a
-        class="footerItem hbutton"
-        id=""
-        href="https://github.com/faetalize/dotdev"
-        >src</a
-      >
+    <!-- Navigation -->
+    <div id="navigation">
+      <div class="nav-item hbutton" id="aboutMe">About Me</div>
+      <div class="nav-item hbutton" id="contact">Contact</div>
+      <div class="nav-item hbutton" id="portfolio">Portfolio</div>
     </div>
-    <div class="navigationMenu">
-      <div class="navigationItem hbutton" id="aboutMe">About Me</div>
-      <div class="navigationItem hbutton" id="contact">Contact</div>
-      <div class="navigationItem hbutton" id="portfolio">Portfolio</div>
-    </div>
-    <div class="page" id="aboutMePage">
+    <!-- Pages -->
+    <div class="page" id="aboutme">
       <div class="bio content">
-        <div class="img-wrapper">
+        <div class="pfp">
           <img src="https://avatars.githubusercontent.com/u/134988598?v=4" />
         </div>
         <p class="username">fætalize</p>
@@ -53,23 +49,33 @@
         </div>
       </div>
     </div>
-    <div class="page" id="contactPage">
+    <div class="page" id="contact">
       <ul>
         <li>@faetalize on Discord</li>
         <li>@fae on X</li>
         <li>faetalize@pm.me</li>
       </ul>
     </div>
-    <div class="page" id="portfolioPage">
+    <div class="page" id="portfolio">
       <div class="content">
         <p>WIP~</p>
       </div>
     </div>
+    <div class="footer">
+      <div class="footerItem hbutton" id="credits">Credits</div>
+      <a
+        class="footerItem hbutton"
+        id=""
+        href="https://github.com/faetalize/dotdev"
+        >src</a
+      >
+    </div>
+    <!-- Overlay -->
     <div class="overlay">
-      <div class="headerBar" id="header-overlay">
+      <div class="header" id="header-overlay">
         <div class="hbutton" id="btn-overlay-close">CLOSE</div>
       </div>
-      <div class="overlayContent">
+      <div class="body">
         <ul>
           <li>
             background img:
