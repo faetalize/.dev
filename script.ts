@@ -200,7 +200,7 @@ let progress = 0;
 let currentPage: HTMLElement | null = null;
 
 //audiocontext for our sfx
-const audioContext = new AudioContext();
+const audioContext = new AudioContext({sampleRate: 44100});
 const sfxBuffers = await loadSFXBuffers();
 
 //audio element for bgm
