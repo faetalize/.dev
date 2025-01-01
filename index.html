@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"  rel="preload" />
     <script src="script.ts" defer type="module"></script>
-    <title>faetal</title>
+    <title>妖精</title>
   </head>
   <body>
+    <div id="loading-screen">
+      <div id="loading-bar">
+        <div id="loading-progress"></div>
+      </div>
+    </div>
     <!-- Landing -->
     <div id="landing-screen">
       <p id="landing-text">Embrace the Golden Order.</p>
@@ -41,6 +46,7 @@
           <span class="chip chip-expert">CSS</span>
           <span class="chip chip-expert">Javascript</span>
           <span class="chip chip-intermediate">Angular</span>
+          <span class="chip chip-intermediate">React</span>
           <span class="chip chip-intermediate">.NET</span>
           <span class="chip chip-intermediate">WPF</span>
         </div>
