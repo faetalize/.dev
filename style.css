@@ -65,12 +65,10 @@ p:not(#landing-text) {
 
 .hbutton {
     cursor: pointer;
-    -webkit-transition: filter 0.2s;
     transition: filter 0.2s;
 }
 
 .hbutton:hover {
-    -webkit-filter: drop-shadow(0px 0px 5px white);
     filter: drop-shadow(0px 0px 5px white);
 }
 
@@ -117,7 +115,7 @@ p:not(#landing-text) {
     align-items: center;
 }
 
-#bg video {
+#bg img {
     /*fit the image at the bottom of the screen*/
     object-fit: cover;
     width: 65dvh;
@@ -134,21 +132,18 @@ p:not(#landing-text) {
     width: 100dvw;
     z-index: 99;
     font-size: 3rem;
+    -webkit-backdrop-filter: blur(24px);
     backdrop-filter: blur(24px);
 }
 
 #landing-text {
-    -webkit-transition: 0.1s;
-    transition: 0.1s;
+    transition: font-size 0.1s;
     font-weight: 600;
 }
 
 #landing-text:hover {
     font-size: 3.05rem;
-    -webkit-filter: drop-shadow(0px 0px 5px white);
     filter: drop-shadow(0px 0px 5px white);
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
 }
 
 #navigation {
@@ -175,7 +170,6 @@ p:not(#landing-text) {
 }
 
 .content {
-    overflow-y: auto;
     max-width: 32rem;
     margin:2rem;
 }
@@ -191,11 +185,8 @@ p:not(#landing-text) {
     display: block;
     width: 8rem;
     height: 8rem;
-    min-height: 8rem;
-    min-height: 8rem;
     border-radius: 4rem;
     overflow: hidden;
-    -webkit-transition: transform 0.2s;
     transition: transform 0.2s;
 }
 
@@ -206,7 +197,6 @@ p:not(#landing-text) {
 }
 
 .pfp:hover {
-    -webkit-transform: scale(1.05);
     transform: scale(1.05);
 }
 
@@ -225,7 +215,6 @@ p:not(#landing-text) {
 .chip {
     color: #c1c1c1;
     font-size: 0.9rem;
-    -webkit-transition: filter 0.2s, color 0.2s;
     transition: filter 0.2s, color 0.2s;
 }
 
