@@ -1,8 +1,8 @@
-import start from "./media/start.mp3";
-import hover from "./media/hover.mp3";
-import select from "./media/select.mp3";
-import back from "./media/back.mp3";
-import bgm from "./media/bgm.mp3";
+import start from "/media/start.mp3";
+import hover from "/media/hover.mp3";
+import select from "/media/select.mp3";
+import back from "/media/back.mp3";
+import bgm from "/media/bgm.mp3";
 
 window.addEventListener("load", () => {
   updateProgress();
