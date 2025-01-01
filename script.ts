@@ -4,6 +4,10 @@ import select from "./media/select.mp3";
 import back from "./media/back.mp3";
 import bgm from "./media/bgm.mp3";
 
+window.addEventListener("load", () => {
+  updateProgress();
+});
+
 const landingScreen = document.querySelector<HTMLDivElement>("#landing-screen");
 const landingText =
   document.querySelector<HTMLParagraphElement>("#landing-text");
@@ -21,17 +25,37 @@ const overlayCloseButton =
   document.querySelector<HTMLButtonElement>("#btn-overlay-close");
 const creditsButton = document.querySelector<HTMLButtonElement>("#credits");
 const hButtons = document.querySelectorAll<HTMLButtonElement>(".hbutton");
+const progressBar = document.querySelector<HTMLDivElement>("#loading-progress");
+const loadingScreen = document.querySelector<HTMLDivElement>("#loading-screen");
 
-//keep track of the current page
-let currentPage: HTMLElement | null = null;
-
-//audiocontext for sfx
-const audioContext = new AudioContext();
-const audioBuffers = await loadSFXBuffers();
-
-enum SoundEffect{
-  START, HOVER, SELECT, BACK
+enum SoundEffect {
+  START,
+  HOVER,
+  SELECT,
+  BACK,
 }
+
+/**
+ * Updates the progress bar and handles the completion state.
+ *
+ * @param {number} progress - The current progress value.
+ *
+ * Increments the progress value, updates the width of the progress bar,
+ * and logs a message when loading is finished. If the progress reaches
+ * or exceeds 100%, it hides the loading screen after a delay.
+ */
+function updateProgress(){
+  const total = 6
+  progress = progress + 1;
+  if(progressBar) progressBar.style.width = `${(progress/total)*100}%`;
+  if (progress >= total) {
+    console.log("Finished loading");
+    setTimeout(() => {
+      hide(loadingScreen);
+    }, 1000);
+  }
+}
+
 /**
  * Hide an element (with a 0.5s fade out animation)
  * @param {HTMLElement} element The element to hide
@@ -41,6 +65,8 @@ function hide(element: HTMLElement | null): void {
     console.error("Element to hide not found.");
     return;
   }
+  //disable pointer events
+  element.style.pointerEvents = "none";
   element.style.transition = "opacity 0.5s";
   element.style.opacity = "0";
   setTimeout(() => {
@@ -58,6 +84,7 @@ function show(element: HTMLElement | null, transitioning: boolean): void {
     console.error("Element to show not found.");
     return;
   }
+  element.style.pointerEvents = "auto";
   if (transitioning) {
     setTimeout(function () {
       element.style.display = "flex";
@@ -80,22 +107,27 @@ function show(element: HTMLElement | null, transitioning: boolean): void {
   }
 }
 
+
 /**
- * Plays audio file with a gradual increase in volume (after enough has loaded)
- * @param {string} path The path to the audio file
- * @param {number} initialVolume Initial volume
- * @param {number} finalVolume Final volume
- * @param {number} duration_ms Duration of the volume increase
- * @param {boolean} loop Whether or not to loop the audio
+ * Plays background music with a volume transition effect.
+ *
+ * @param initialVolume - The initial volume level of the audio (between 0.0 and 1.0).
+ * @param finalVolume - The final volume level of the audio (between 0.0 and 1.0).
+ * @param duration_ms - The duration of the volume transition in milliseconds.
+ * @param loop - A boolean indicating whether the audio should loop.
+ * @param audioElement - The HTMLAudioElement that will play the audio.
+ *
+ * @remarks
+ * If the initial volume is equal to the final volume, the audio will start playing immediately without any transition.
+ * The volume transition is achieved by gradually adjusting the volume in small steps over the specified duration.
  */
-function playAudio(
-  path: string,
+function playBGM(
   initialVolume: number,
   finalVolume: number,
   duration_ms: number,
-  loop: boolean
+  loop: boolean,
+  audioElement: HTMLAudioElement
 ): void {
-  const audioElement = new Audio(path);
   audioElement.volume = initialVolume;
   audioElement.loop = loop;
   if (initialVolume == finalVolume) {
@@ -104,50 +136,48 @@ function playAudio(
     return;
   }
   //start when enough of the audio has loaded
-  audioElement.addEventListener("canplay", () => {
-    audioElement.play();
-    const intervalDuration = 100;
-    const steps = duration_ms / intervalDuration;
-    const volumeStep = (finalVolume - initialVolume) / steps;
-    const interval = setInterval(() => {
-      if (audioElement.volume + volumeStep < finalVolume) {
-        audioElement.volume += volumeStep;
-      } else {
-        audioElement.volume = finalVolume;
-        clearInterval(interval);
-      }
-    }, intervalDuration);
-  });
+  audioElement.play();
+  const intervalDuration = 100;
+  const steps = duration_ms / intervalDuration;
+  const volumeStep = (finalVolume - initialVolume) / steps;
+  const interval = setInterval(() => {
+    if (audioElement.volume + volumeStep < finalVolume) {
+      audioElement.volume += volumeStep;
+    } else {
+      audioElement.volume = finalVolume;
+      clearInterval(interval);
+    }
+  }, intervalDuration);
 }
 
-
 /**
- * Asynchronously loads an audio buffer from a given file path.
+ * Loads an audio buffer from a given file path and decodes it using the provided AudioContext.
  *
  * @param {string} path - The path to the audio file to be loaded.
- * @returns {Promise<AudioBuffer>} A promise that resolves to the loaded AudioBuffer.
- * @throws {Error} If the fetch request or audio decoding fails.
+ * @param {AudioContext} context - The AudioContext used to decode the audio data.
+ * @returns {Promise<AudioBuffer>} A promise that resolves to the decoded AudioBuffer.
  */
-async function loadAudioBuffer(path: string): Promise<AudioBuffer> {
+async function loadAudioBuffer(path: string, context: AudioContext): Promise<AudioBuffer> {
   const response = await fetch(path);
   const arrayBuffer = await response.arrayBuffer();
-  return await audioContext.decodeAudioData(arrayBuffer);
+  updateProgress();
+  return await context.decodeAudioData(arrayBuffer);
 }
 
 /**
  * Asynchronously loads sound effect (SFX) buffers and returns them as an array of `AudioBuffer` objects.
- * 
+ *
  * This function loads audio buffers for different sound effects such as start, hover, select, and back.
- * 
+ *
  * @returns {Promise<AudioBuffer[]>} A promise that resolves to an array of `AudioBuffer` objects.
  */
-async function loadSFXBuffers(){
-  const sfxBuffers : AudioBuffer[] = []
-  sfxBuffers[SoundEffect.START] = await loadAudioBuffer(start);
-  sfxBuffers[SoundEffect.HOVER] = await loadAudioBuffer(hover);
-  sfxBuffers[SoundEffect.SELECT] = await loadAudioBuffer(select);
-  sfxBuffers[SoundEffect.BACK] = await loadAudioBuffer(back);
-  return sfxBuffers
+async function loadSFXBuffers(): Promise<AudioBuffer[]> {
+  const sfxBuffers: AudioBuffer[] = [];
+  sfxBuffers[SoundEffect.START] = await loadAudioBuffer(start,audioContext);
+  sfxBuffers[SoundEffect.HOVER] = await loadAudioBuffer(hover, audioContext);
+  sfxBuffers[SoundEffect.SELECT] = await loadAudioBuffer(select, audioContext);
+  sfxBuffers[SoundEffect.BACK] = await loadAudioBuffer(back, audioContext);
+  return sfxBuffers;
 }
 
 /**
@@ -155,17 +185,34 @@ async function loadSFXBuffers(){
  *
  * @param sfx - The sound effect to play. This should be an enum value of type `SoundEffect`. Maps to an audio buffer in the `audioBuffers` object.
  */
-function playSFX(sfx: SoundEffect){
-  const source = audioContext.createBufferSource();
-  source.buffer = audioBuffers[sfx];
-  source.connect(audioContext.destination);
+function playSFX(sfx: SoundEffect, context: AudioContext) {
+  const source = context.createBufferSource();
+  source.buffer = sfxBuffers[sfx];
+  source.connect(context.destination);
+  source.loop;
   source.start(0);
 }
 
+
+
+let progress = 0;
+//keep track of the current page
+let currentPage: HTMLElement | null = null;
+
+//audiocontext for our sfx
+const audioContext = new AudioContext();
+const sfxBuffers = await loadSFXBuffers();
+
+//audio element for bgm
+const audioElement = new Audio(bgm);
+audioElement.addEventListener("canplay", () => {
+  updateProgress();
+});
+
 //hide the landingtext on click, show the menu, and play the audio
 landingText?.addEventListener("click", () => {
-  playSFX(SoundEffect.START);
-  playAudio(bgm, 0, 0.8, 10000, true);
+  playSFX(SoundEffect.START, audioContext);
+  playBGM(0, 0.8, 10000, true, audioElement);
   hide(landingScreen);
   if (backgroundImg) backgroundImg.style.filter = "blur(0px)";
   show(navigation, true);
@@ -204,14 +251,14 @@ backButton?.addEventListener("click", function () {
 for (const button of hButtons) {
   if (!/Mobi|Android/i.test(navigator.userAgent)) {
     button.addEventListener("mouseover", () => {
-      playSFX(SoundEffect.HOVER);
+      playSFX(SoundEffect.HOVER, audioContext);
     });
   }
   button.addEventListener("click", () => {
     if (button.id == "btn-navigation-back") {
-      playSFX(SoundEffect.BACK);
+      playSFX(SoundEffect.BACK, audioContext);
       return;
-    } 
-    playSFX(SoundEffect.SELECT);
+    }
+    playSFX(SoundEffect.SELECT, audioContext);
   });
 }
