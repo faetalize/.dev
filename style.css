@@ -73,6 +73,7 @@ p:not(#landing-text) {
     /*fit the image at the bottom of the screen*/
     object-fit: cover;
     width: 65dvh;
+    height: auto;
     object-position: bottom;
 }
 
