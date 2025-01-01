@@ -18,7 +18,7 @@ const header = document.querySelector<HTMLDivElement>(".header");
 const backButton = document.querySelector<HTMLButtonElement>(
   "#btn-navigation-back"
 );
-const backgroundVideo = document.querySelector<HTMLVideoElement>("#bg video");
+const backgroundVideo = document.querySelector<HTMLVideoElement>("#bg img");
 const footer = document.querySelector<HTMLDivElement>(".footer");
 const overlay = document.querySelector<HTMLDivElement>(".overlay");
 const overlayCloseButton =
@@ -214,7 +214,6 @@ landingText?.addEventListener("click", () => {
   playSFX(SoundEffect.START, audioContext);
   playBGM(0, 0.8, 10000, true, audioElement);
   hide(landingScreen);
-  if (backgroundVideo) backgroundVideo.style.filter = "blur(0px)";
   show(navigation, true);
   show(footer, true);
 });
@@ -255,10 +254,6 @@ for (const button of hButtons) {
     });
   }
   button.addEventListener("click", () => {
-    if (button.id == "btn-navigation-back") {
-      playSFX(SoundEffect.BACK, audioContext);
-      return;
-    }
-    playSFX(SoundEffect.SELECT, audioContext);
+    playSFX(button.id.includes("back") || button.id.includes("close") ? SoundEffect.BACK : SoundEffect.SELECT, audioContext);
   });
 }
