@@ -8,6 +8,15 @@
     font-family: 'Cinzel', serif;
 }
 
+input,
+textarea,
+button,
+select,
+div,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -23,6 +32,33 @@ p:not(#landing-text) {
     cursor: text;
     text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
 
+}
+
+#loading-screen{
+    background: black;
+    z-index: 100;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading-bar {
+    width: calc(100% - 4rem);
+    max-width: 24rem;
+    height: 0.7rem;
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 16px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#loading-progress{
+    background-color: rgb(235, 235, 235);
+    height: 0.7rem;
+    width: 20%;
+    transition: width 0.5s
 }
 
 .hbutton {
