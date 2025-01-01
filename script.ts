@@ -18,7 +18,7 @@ const header = document.querySelector<HTMLDivElement>(".header");
 const backButton = document.querySelector<HTMLButtonElement>(
   "#btn-navigation-back"
 );
-const backgroundImg = document.querySelector<HTMLImageElement>("#bg img");
+const backgroundVideo = document.querySelector<HTMLVideoElement>("#bg video");
 const footer = document.querySelector<HTMLDivElement>(".footer");
 const overlay = document.querySelector<HTMLDivElement>(".overlay");
 const overlayCloseButton =
@@ -47,7 +47,7 @@ enum SoundEffect {
 function updateProgress(){
   const total = 6
   progress = progress + 1;
-  if(progressBar) progressBar.style.width = `${(progress/total)*100}%`;
+  if(progressBar) progressBar.style.transform = `scaleX(${progress/total})`;
   if (progress >= total) {
     console.log("Finished loading");
     setTimeout(() => {
@@ -214,7 +214,7 @@ landingText?.addEventListener("click", () => {
   playSFX(SoundEffect.START, audioContext);
   playBGM(0, 0.8, 10000, true, audioElement);
   hide(landingScreen);
-  if (backgroundImg) backgroundImg.style.filter = "blur(0px)";
+  if (backgroundVideo) backgroundVideo.style.filter = "blur(0px)";
   show(navigation, true);
   show(footer, true);
 });
@@ -233,7 +233,7 @@ navigation?.addEventListener("click", (event) => {
   if (![...navigationItems].includes(navItem)) return;
   const index: number = [...navigationItems].indexOf(navItem);
   hide(navigation);
-  hide(backgroundImg);
+  hide(backgroundVideo);
   show(header, true);
   show(pages[index], true);
   currentPage = pages[index];
@@ -243,7 +243,7 @@ backButton?.addEventListener("click", function () {
   hide(header);
   hide(currentPage);
   show(navigation, true);
-  show(backgroundImg, true);
+  show(backgroundVideo, true);
   currentPage = null;
 });
 
